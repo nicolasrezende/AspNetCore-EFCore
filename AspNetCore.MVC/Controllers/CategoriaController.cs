@@ -13,12 +13,14 @@ namespace AspNetCore.MVC.Controllers
             this._repositoryCategoria = repositoryCategoria;
         }
 
+        // GET: Categoria
         public IActionResult Index()
         {
             var categorias = _repositoryCategoria.GetAll();
             return View(categorias);
         }
 
+        // GET: Categoria/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null) return RedirectToAction("Index");
@@ -30,6 +32,7 @@ namespace AspNetCore.MVC.Controllers
             return View(categoria);
         }
 
+        // POST: Categoria/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Categoria categoria)
@@ -45,6 +48,7 @@ namespace AspNetCore.MVC.Controllers
             }
         }
 
+        // GET: Categoria/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null) return RedirectToAction("Index");
@@ -55,11 +59,13 @@ namespace AspNetCore.MVC.Controllers
             return View(categoria);
         }
 
+        // GET: Categoria/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        // POST: Categoria/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Categoria categoria)
@@ -72,6 +78,7 @@ namespace AspNetCore.MVC.Controllers
             return View();
         }
 
+        // GET: Categoria/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null) return RedirectToAction("Index");
@@ -80,6 +87,7 @@ namespace AspNetCore.MVC.Controllers
             return View(categoria);
         }
 
+        // POST: Categoria/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
@@ -89,6 +97,20 @@ namespace AspNetCore.MVC.Controllers
             var categoria = _repositoryCategoria.GetById(id.Value);
             _repositoryCategoria.Remove(categoria);
             return RedirectToAction("Index");
+        }
+
+        // GET: Categoria/search?descricao=th
+        //public IActionResult Search(string descricao)
+        //{
+        //    var categorias = _repositoryCategoria.ListarPorDescricao(descricao);
+        //    return View("Index", categorias);
+        //}
+
+        //GET: Categoria/search? descricao = th
+        [HttpGet]
+        public JsonResult Search(string descricao)
+        {
+            return Json(_repositoryCategoria.ListarPorDescricao(descricao));
         }
     }
 }

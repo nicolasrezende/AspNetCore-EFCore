@@ -9,7 +9,17 @@
     <span><a asp-action="Create" class="btn btn-default">Nova Categoria</a></span>
 </div>
 <br />
-<table class="table">
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputCategoria" placeholder="Buscar categoria" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary" id="buttonCategoria">Buscar</button>
+    </div>
+</div>
+<table class="table" id="tableCategorias">
     <thead>
         <tr>
                 <th>
@@ -46,3 +56,7 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/categoria.js"></script>
+}
