@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AspNetCore.Domain.Entities.Categoria>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+}
+<h1>Lista de Categorias</h1>
+<hr />
+<div>
+    <span><a asp-action="Create" class="btn btn-default">Nova Categoria</a></span>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                <span class="pull-right">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Remover</a>
+                </span>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
