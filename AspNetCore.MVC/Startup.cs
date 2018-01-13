@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AspNetCore.IoC;
 using AspNetCore.Data.Data;
+using AutoMapper;
 
 namespace AspNetCore.MVC
 {
@@ -21,6 +22,7 @@ namespace AspNetCore.MVC
         {
             services.AddMvc();
             services.RegisterServices();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

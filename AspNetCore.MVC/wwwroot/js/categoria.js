@@ -1,16 +1,26 @@
 ﻿$(function () {
 
     var btn = $('#buttonCategoria');
+    var input = $('#inputCategoria');
+
     btn.click(function (event) {
         var descricao = $('#inputCategoria').val();
         getDados(descricao);
+    });
+
+    input.keypress(function (event) {
+        var descricao = input.val();
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == 13) {
+            getDados(descricao);
+        }
     });
 });
 
 function getDados(descricao) {
 
     $.get('/categoria/search?descricao=' + descricao + '')
-        .done(function (response) {
+        .done(function (response) {            
             montaTabela(response);
         });
 }
