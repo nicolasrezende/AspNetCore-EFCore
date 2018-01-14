@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace AspNetCore.Domain.Entities
 {
@@ -10,12 +9,17 @@ namespace AspNetCore.Domain.Entities
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
 
+        public Produto()
+        {
+            this.DataCadastro = DateTime.Now;
+        }
+
         public Produto(string descricao, decimal precoUnitario, int categoriaId)
         {
             this.Descricao = descricao;
             this.PrecoUnitario = precoUnitario;
             this.CategoriaId = categoriaId;
-            this.DataCadastro = DateTime.Today;
+            this.DataCadastro = DateTime.Now;
         }
     }
 }

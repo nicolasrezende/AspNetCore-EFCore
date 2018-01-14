@@ -9,6 +9,7 @@ namespace AspNetCore.MVC.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<Categoria, CategoriaViewModel>();
+            CreateMap<Produto, ProdutoViewModel>();
         }
     }
 }

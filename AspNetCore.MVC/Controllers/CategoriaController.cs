@@ -110,7 +110,7 @@ namespace AspNetCore.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //GET: Categoria/search? descricao = th
+        //GET: Categoria/search?descricao=th
         [HttpGet]
         public JsonResult Search(string descricao)
         {

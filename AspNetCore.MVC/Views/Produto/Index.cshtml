@@ -1,26 +1,32 @@
-﻿@model IEnumerable<CategoriaViewModel>
+﻿@model IEnumerable<ProdutoViewModel>
 
 @{
-    ViewData["Title"] = "Lista de Categorias";
+    ViewData["Title"] = "Lista de Produtos";
 }
-<h1>Lista de Categorias</h1>
+
+<h1>Lista de Produtos</h1>
 <hr />
 <div>
-    <span><a asp-action="Create" class="btn btn-default">Nova Categoria</a></span>
+    <span><a asp-action="Create" class="btn btn-default">Novo Produto</a></span>
 </div>
 <br />
-<div id="erroCategoria" class="alert alert-danger" hidden role="alert">Ocorreu um erro ao pesquisar categorias.</div>
+<div id="erroProduto" class="alert alert-danger" hidden role="alert">Ocorreu um erro ao pesquisar produtos.</div>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-2">
+        <div class="form-group">            
+            <select id="selectCategorias" class="form-control" asp-items="ViewBag.Categorias"></select>
+        </div>
+    </div>
+    <div class="col-md-8">
         <div class="form-group">
-            <input type="text" class="form-control" id="inputCategoria" placeholder="Buscar categoria" />
+            <input type="text" class="form-control" id="inputProduto" placeholder="Buscar produto" />
         </div>
     </div>
     <div class="col-md-2">
-        <button type="submit" class="btn btn-primary" id="buttonCategoria">Buscar</button>
+        <button type="submit" class="btn btn-primary" id="buttonProduto">Buscar</button>
     </div>
 </div>
-<table class="table" id="tableCategorias">
+<table class="table" id="tableProdutos">
     <thead>
         <tr>
                 <th>
@@ -30,8 +36,12 @@
                     @Html.DisplayNameFor(model => model.Descricao)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataCadastro)
+                    @Html.DisplayNameFor(model => model.PrecoUnitario)
                 </th>
+                <th>
+                    Categoria
+                </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -44,7 +54,10 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
+                @Html.DisplayFor(modelItem => item.PrecoUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Descricao)
             </td>
             <td>
                 <span class="pull-right">
@@ -58,6 +71,6 @@
     </tbody>
 </table>
 
-@section Scripts {
-    <script src="~/js/categoria.js"></script>
+@section Scripts{
+    <script src="~/js/produto.js"></script>
 }

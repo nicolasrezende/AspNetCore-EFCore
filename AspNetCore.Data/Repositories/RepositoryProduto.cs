@@ -8,16 +8,31 @@ namespace AspNetCore.Data.Repositories
 {
     public class RepositoryProduto : RepositoryBase<Produto>, IRepositoryProduto
     {
-        public IEnumerable<Produto> PesquisarPorCategoria(string categoria)
+        public override IEnumerable<Produto> GetAll()
         {
             return context.Produtos
-                .Include(p => p.Categoria)
-                .Where(p => p.Categoria.Descricao == categoria);
+                .Include(p => p.Categoria).ToList();
+        }
+
+        public override Produto GetById(int id)
+        {
+            return context.Produtos
+                .Include(p => p.Categoria).FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Produto> PesquisarPorDescricao(string descricao)
         {
-            return context.Produtos.Where(p => p.Descricao == descricao).ToList();
+            return context.Produtos
+                .Include(p => p.Categoria)
+                .Where(p => EF.Functions.Like(p.Descricao, $"%{descricao}%")).ToList();
+        }
+
+        public IEnumerable<Produto> PesquisarPorDescricaoECategoria(string descricao, int categoria)
+        {
+            return context.Produtos
+                .Include(p => p.Categoria)
+                .Where(p => EF.Functions.Like(p.Descricao, $"%{descricao}%") && p.CategoriaId == categoria)
+                .ToList();
         }
     }
 }

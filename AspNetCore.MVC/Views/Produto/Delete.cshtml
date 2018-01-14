@@ -1,0 +1,42 @@
+﻿@model ProdutoViewModel
+
+@{
+    ViewData["Title"] = "Remover Produto";
+}
+
+<h3>Deseja realmente remover produto?</h3>
+<div>
+    <h4>Remover Produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoUnitario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecoUnitario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Descricao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Deletar" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-primary">Voltar para lista</a>
+    </form>
+</div>

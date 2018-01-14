@@ -21,9 +21,9 @@ namespace AspNetCore.Data.Repositories
             context.SaveChanges();
         }
 
-        public IEnumerable<TEntity> GetAll() => context.Set<TEntity>().ToList();
+        public virtual IEnumerable<TEntity> GetAll() => context.Set<TEntity>().ToList();
 
-        public TEntity GetById(int id) => context.Set<TEntity>().Find(id);
+        public virtual TEntity GetById(int id) => context.Set<TEntity>().Find(id);
 
         public void Remove(TEntity entity)
         {

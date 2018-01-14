@@ -1,0 +1,46 @@
+﻿@model ProdutoViewModel
+
+@{
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<div>
+    <h4>Detalhes do Produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoUnitario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecoUnitario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Descricao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Editar</a>
+    <a asp-action="Index" class="btn btn-primary">Voltar para lista</a>
+</div>

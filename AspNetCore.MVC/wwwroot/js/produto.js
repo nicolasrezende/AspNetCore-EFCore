@@ -1,37 +1,43 @@
 ﻿$(function () {
 
-    var btn = $('#buttonCategoria');
-    var input = $('#inputCategoria');
+    var btn = $('#buttonProduto');
+    var input = $('#inputProduto');
+    var select = $('#selectCategorias');
 
     btn.click(function (event) {
-        var descricao = $('#inputCategoria').val();
-        getDados(descricao);
+
+        var descricao = input.val();
+        var categoria = select.val();
+        getDados(descricao, categoria);
     });
 
     input.keypress(function (event) {
+
         var descricao = input.val();
+        var categoria = select.val();
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) {
-            getDados(descricao);
+            getDados(descricao, categoria);
         }
     });
 });
 
-function getDados(descricao) {
+function getDados(descricao, categoria) {
 
-    $.get('categoria/search?descricao=' + descricao + '')
+    
+    $.get('produto/search?categoria=' + categoria + '&descricao=' + descricao + '')
         .done(function (response) {
             montaTabela(response);
         })
         .fail(function (erro) {
-            $('#erroCategoria').removeAttr('hidden');
+            $('#erroProduto').removeAttr('hidden');
         });
 }
 
 function montaTabela(dados) {
 
     //remove linhas
-    $('#tableCategorias').children('tbody').children('tr').remove();
+    $('#tableProdutos').children('tbody').children('tr').remove();
 
     dados.forEach(function (dado) {
 
@@ -47,23 +53,21 @@ function novaLinha(dado) {
     var novaLinha = $('<tr>');
     var colunaId = $('<td>').text(id);
     var colunaDescricao = $('<td>').text(dado.descricao);
-
-    var data = new Date(dado.dataCadastro);
-    var dia = data.getDate().toString().length > 1 ? data.getDate() : '0' + data.getDate().toString();
-    var mes = data.getMonth().toString().length > 1 ? data.getMonth() + 1 : '0' + (data.getMonth() + 1).toString();
-    var colunaData = $('<td>').text(dia + '/' + mes + '/' + data.getFullYear());
+    var colunaPreco = $('<td>').text(dado.precoUnitario.toLocaleString('pt-br',
+        {style: 'currency', currency: 'BRL'}));
+    var colunaCategoria = $('<td>').text(dado.categoria.descricao);
 
     var colunaLinks = $('<td>');
     var span = $('<span>').addClass('pull-right');
 
     var linkEditar = $('<a>').addClass('btn').addClass('btn-success').addClass('margin-btn')
-        .attr('href', '/Categoria/Edit/' + id + '').text('Editar');
+        .attr('href', '/Produto/Edit/' + id + '').text('Editar');
 
     var linkDetalhes = $('<a>').addClass('btn').addClass('btn-primary').addClass('margin-btn')
-        .attr('href', '/Categoria/Details/' + id + '').text('Detalhes');
+        .attr('href', '/Produto/Details/' + id + '').text('Detalhes');
 
     var linkRemover = $('<a>').addClass('btn').addClass('btn-danger').addClass('margin-btn')
-        .attr('href', '/Categoria/Delete/' + id + '').text('Remover');
+        .attr('href', '/Produto/Delete/' + id + '').text('Remover');
 
     span.append(linkEditar);
     span.append(linkDetalhes);
@@ -73,7 +77,8 @@ function novaLinha(dado) {
 
     novaLinha.append(colunaId);
     novaLinha.append(colunaDescricao);
-    novaLinha.append(colunaData);
+    novaLinha.append(colunaPreco);
+    novaLinha.append(colunaCategoria);
     novaLinha.append(colunaLinks);
 
     return novaLinha;
